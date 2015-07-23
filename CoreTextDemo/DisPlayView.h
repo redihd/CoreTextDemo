@@ -7,8 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-//引入CoreText相关库
-#import "CoreText/CoreText.h"
 
 @interface DisPlayView : UIView
 

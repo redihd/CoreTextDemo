@@ -15,6 +15,7 @@
 		32A3A3D31B5F874000EE16C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3D11B5F874000EE16C1 /* LaunchScreen.xib */; };
 		32A3A3EA1B5F887B00EE16C1 /* DisPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3E91B5F887B00EE16C1 /* DisPlayView.m */; };
 		32A3A3ED1B5FA6EE00EE16C1 /* CoreTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3EC1B5FA6EE00EE16C1 /* CoreTextParser.m */; };
+		32FBA7AC1B6098BC00EDB3EA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FBA7AB1B6098BC00EDB3EA /* CoreText.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		32A3A3E91B5F887B00EE16C1 /* DisPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisPlayView.m; sourceTree = "<group>"; };
 		32A3A3EB1B5FA6EE00EE16C1 /* CoreTextParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextParser.h; sourceTree = "<group>"; };
 		32A3A3EC1B5FA6EE00EE16C1 /* CoreTextParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextParser.m; sourceTree = "<group>"; };
+		32FBA7AA1B60823C00EDB3EA /* CoreTextDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreTextDemo-Prefix.pch"; sourceTree = "<group>"; };
+		32FBA7AB1B6098BC00EDB3EA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32FBA7AC1B6098BC00EDB3EA /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +52,7 @@
 		32A3A3B61B5F874000EE16C1 = {
 			isa = PBXGroup;
 			children = (
+				32FBA7AB1B6098BC00EDB3EA /* CoreText.framework */,
 				32A3A3C11B5F874000EE16C1 /* CoreTextDemo */,
 				32A3A3C01B5F874000EE16C1 /* Products */,
 			);
@@ -85,6 +90,7 @@
 			children = (
 				32A3A3C31B5F874000EE16C1 /* Info.plist */,
 				32A3A3C41B5F874000EE16C1 /* main.m */,
+				32FBA7AA1B60823C00EDB3EA /* CoreTextDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -273,6 +279,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "CoreTextDemo/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreTextDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -283,6 +290,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "CoreTextDemo/CoreTextDemo-Prefix.pch";
 				INFOPLIST_FILE = CoreTextDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
