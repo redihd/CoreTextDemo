@@ -14,6 +14,7 @@
 		32A3A3D01B5F874000EE16C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3CF1B5F874000EE16C1 /* Images.xcassets */; };
 		32A3A3D31B5F874000EE16C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3D11B5F874000EE16C1 /* LaunchScreen.xib */; };
 		32A3A3EA1B5F887B00EE16C1 /* DisPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3E91B5F887B00EE16C1 /* DisPlayView.m */; };
+		32A3A3ED1B5FA6EE00EE16C1 /* CoreTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3EC1B5FA6EE00EE16C1 /* CoreTextParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		32A3A3D21B5F874000EE16C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		32A3A3E81B5F887B00EE16C1 /* DisPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisPlayView.h; sourceTree = "<group>"; };
 		32A3A3E91B5F887B00EE16C1 /* DisPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisPlayView.m; sourceTree = "<group>"; };
+		32A3A3EB1B5FA6EE00EE16C1 /* CoreTextParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextParser.h; sourceTree = "<group>"; };
+		32A3A3EC1B5FA6EE00EE16C1 /* CoreTextParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,8 @@
 				32A3A3C21B5F874000EE16C1 /* Supporting Files */,
 				32A3A3E81B5F887B00EE16C1 /* DisPlayView.h */,
 				32A3A3E91B5F887B00EE16C1 /* DisPlayView.m */,
+				32A3A3EB1B5FA6EE00EE16C1 /* CoreTextParser.h */,
+				32A3A3EC1B5FA6EE00EE16C1 /* CoreTextParser.m */,
 			);
 			path = CoreTextDemo;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				32A3A3EA1B5F887B00EE16C1 /* DisPlayView.m in Sources */,
 				32A3A3C81B5F874000EE16C1 /* AppDelegate.m in Sources */,
 				32A3A3C51B5F874000EE16C1 /* main.m in Sources */,
+				32A3A3ED1B5FA6EE00EE16C1 /* CoreTextParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +308,7 @@
 				32A3A3E41B5F874000EE16C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
