@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DisPlayView.h"
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet DisPlayView *disPlayView;
 
 @end
 

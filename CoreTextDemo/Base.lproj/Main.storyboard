@@ -17,18 +17,21 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2J-RI-YsV" customClass="DisPlayView">
-                                <rect key="frame" x="100" y="100" width="400" height="400"/>
+                                <rect key="frame" x="20" y="20" width="560" height="560"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="d2J-RI-YsV" secondAttribute="trailing" constant="100" id="FqR-Lu-MfM"/>
-                            <constraint firstItem="d2J-RI-YsV" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="100" id="Gdw-dR-sLh"/>
-                            <constraint firstItem="d2J-RI-YsV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="100" id="Thx-cE-beg"/>
-                            <constraint firstAttribute="bottom" secondItem="d2J-RI-YsV" secondAttribute="bottom" constant="100" id="t6n-dc-d11"/>
+                            <constraint firstAttribute="trailing" secondItem="d2J-RI-YsV" secondAttribute="trailing" constant="20" id="FqR-Lu-MfM"/>
+                            <constraint firstItem="d2J-RI-YsV" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="Gdw-dR-sLh"/>
+                            <constraint firstItem="d2J-RI-YsV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="Thx-cE-beg"/>
+                            <constraint firstAttribute="bottom" secondItem="d2J-RI-YsV" secondAttribute="bottom" constant="20" id="t6n-dc-d11"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="disPlayView" destination="d2J-RI-YsV" id="FEy-KR-1s4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,5 +18,5 @@
 
 @property (strong, nonatomic) NSMutableArray* images;
 
--(NSAttributedString*)getAttrStringFromText:(NSString*)text;
+- (NSAttributedString*)getAttrStringFromText:(NSString*)text;
 @end

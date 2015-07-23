@@ -17,7 +17,7 @@
 {
     self = [super init];
     if (self) {
-        self.font = @"Arial";
+        self.font = @"ArialMT";
         self.color = [UIColor blackColor];
         self.strokeColor = [UIColor whiteColor];
         self.strokeWidth = 0.0;
@@ -28,6 +28,17 @@
 
 #pragma mark -
 #pragma mark
+
+/* Callbacks */
+static CGFloat ascentCallback( void *ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"height"] floatValue];
+}
+static CGFloat descentCallback( void *ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"descent"] floatValue];
+}
+static CGFloat widthCallback( void* ref ){
+    return [(NSString*)[(__bridge NSDictionary*)ref objectForKey:@"width"] floatValue];
+}
 
 -(NSAttributedString*)getAttrStringFromText:(NSString*)text
 {
@@ -92,7 +103,65 @@
                 [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
                     self.font = [tag substringWithRange:match.range];
                 }];
-            } 
+            }
+            if ([tag hasPrefix:@"img"]) {
+                
+                __block NSNumber* width = [NSNumber numberWithInt:0];
+                __block NSNumber* height = [NSNumber numberWithInt:0];
+                __block NSString* fileName = @"";
+                
+                //宽度
+                NSRegularExpression* widthRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=width=\")[^\"]+" options:0 error:NULL];
+                [widthRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    width = [NSNumber numberWithInt: [[tag substringWithRange: match.range] intValue] ];
+                }];
+                
+                //高度
+                NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=height=\")[^\"]+" options:0 error:NULL];
+                [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    height = [NSNumber numberWithInt: [[tag substringWithRange:match.range] intValue]];
+                }];
+                
+                //图片名
+                NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=src=\")[^\"]+" options:0 error:NULL];
+                [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+                    fileName = [tag substringWithRange: match.range];
+                }];
+                
+                //添加到数组中等待之后的绘制
+                [self.images addObject:
+                 [NSDictionary dictionaryWithObjectsAndKeys:
+                  width, @"width",
+                  height, @"height",
+                  fileName, @"fileName",
+                  [NSNumber numberWithInt: (int)[aString length]], @"location",
+                  nil]
+                 ];
+                
+                //设置CTRun的callBacks 和图片相关信息 来得到 CTRunDelegateRef
+                CTRunDelegateCallbacks callbacks;
+                callbacks.version = kCTRunDelegateVersion1;
+                callbacks.getAscent = ascentCallback;
+                callbacks.getDescent = descentCallback;
+                callbacks.getWidth = widthCallback;
+                
+                NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          width, @"width",
+                                          height, @"height",
+                                          nil];
+                
+                CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr));
+                NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                        //set the delegate
+                                                        (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                                        nil];
+                
+                //添加一个空白占位符 让它能够调用 callBacks 最后给生成的图片留下位置来做绘制操作
+                // 使用0xFFFC作为空白的占位符
+                unichar objectReplacementChar = 0xFFFC;
+                NSString * content = [NSString stringWithCharacters:&objectReplacementChar length:1];
+                [aString appendAttributedString:[[NSAttributedString alloc] initWithString:content attributes:attrDictionaryDelegate]];
+            }
         }
     }
     
