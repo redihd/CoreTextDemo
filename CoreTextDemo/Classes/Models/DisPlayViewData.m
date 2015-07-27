@@ -34,16 +34,17 @@
 }
 
 - (void)addPositionDataToImageArray{
+    //取一个临时变量 可使用替换obj方法 replaceObjectAtIndex
     NSMutableArray *tempImageArray = [NSMutableArray arrayWithArray:self.imageArray];
+    //得到cflines
     NSArray *lines = (NSArray *)CTFrameGetLines(self.ctFrame);
     NSUInteger lineCount = [lines count];
     CGPoint lineOrigins[lineCount];
     CTFrameGetLineOrigins(self.ctFrame, CFRangeMake(0, 0), lineOrigins);
-    int imgIndex = 0; //3
+    // 拿到image所在位置（到时候需要设置位置，好画图）
+    int imgIndex = 0; 
     NSDictionary* nextImage = [self.imageArray objectAtIndex:imgIndex];
     int imgLocation = [[nextImage objectForKey:@"location"] intValue];
-    
-    //
     CFRange frameRange = CTFrameGetVisibleStringRange(self.ctFrame);
     while ( imgLocation < frameRange.location ) {
         imgIndex++;
@@ -52,9 +53,11 @@
         imgLocation = [[nextImage objectForKey:@"location"] intValue];
     }
     
+    // 遍历 line
     NSUInteger lineIndex = 0;
     for (id lineObj in lines) {
         CTLineRef line = (__bridge CTLineRef)lineObj;
+        // 遍历line 中得cfrun 得到image 的大小，位置等，重新对imageArray赋值
         for (id runObj in (NSArray *)CTLineGetGlyphRuns(line)) {
             CTRunRef run = (__bridge CTRunRef)runObj;
             CFRange runRange = CTRunGetStringRange(run);

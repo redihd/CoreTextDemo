@@ -10,17 +10,11 @@
 
 @interface DisPlayView ()
 
-@property (nonatomic, strong) DisPlayViewData * coreTextData;
+@property (strong, nonatomic) DisPlayViewData * coreTextData;
 
 @end
 
 @implementation DisPlayView
-
--(void)setDataSourceWithAttributedString:(NSAttributedString *)attring images:(NSMutableArray *)images{
-    self.attString = attring;
-    self.images = images;
-    self.drawImages = [NSArray array];
-}
 
 -(void)setDataSourceWithDisPlayData:(DisPlayViewData *)displayData{
     self.coreTextData = displayData;

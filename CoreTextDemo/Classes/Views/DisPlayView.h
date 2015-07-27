@@ -11,12 +11,10 @@
 
 @interface DisPlayView : UIView
 
-@property (strong, nonatomic) NSMutableArray * images;
 @property (assign, nonatomic) CTFrameRef ctFrame;
 @property (strong, nonatomic) NSArray * drawImages;
 @property (strong, nonatomic) NSAttributedString * attString;
 
-- (void)setDataSourceWithAttributedString:(NSAttributedString *)attring images:(NSMutableArray *)images;
 - (void)setDataSourceWithDisPlayData:(DisPlayViewData *)displayData;
 
 @end

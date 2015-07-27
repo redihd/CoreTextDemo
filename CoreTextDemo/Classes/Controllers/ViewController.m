@@ -32,7 +32,9 @@
     [super viewDidLayoutSubviews];
     
     CoreTextParser* parser = [[CoreTextParser alloc] init];
+    
     DisPlayViewData *data = [parser getDisplayDataWithText:@"<img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> Hello <font color=\"red\">core text <font color=\"blue\">world! <img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\">"];
+    
     [self.disPlayView setDataSourceWithDisPlayData:data];
     
     self.disPlayView.height = data.viewHeight;
