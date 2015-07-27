@@ -12,6 +12,8 @@
 		32A3A3CE1B5F874000EE16C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3CC1B5F874000EE16C1 /* Main.storyboard */; };
 		32A3A3D01B5F874000EE16C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3CF1B5F874000EE16C1 /* Images.xcassets */; };
 		32A3A3D31B5F874000EE16C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3D11B5F874000EE16C1 /* LaunchScreen.xib */; };
+		32ADFB8D1B65D42A003883F2 /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 32ADFB8C1B65D42A003883F2 /* UIView+Tools.m */; };
+		32C6465E1B6219830049C9B9 /* DisPlayViewData.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C6465D1B6219830049C9B9 /* DisPlayViewData.m */; };
 		32FBA7AC1B6098BC00EDB3EA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32FBA7AB1B6098BC00EDB3EA /* CoreText.framework */; };
 		32FBA7AE1B60CBB800EDB3EA /* coreText_img.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 32FBA7AD1B60CBB800EDB3EA /* coreText_img.jpeg */; };
 		32FBA7B51B60CCF200EDB3EA /* CoreTextParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 32FBA7B41B60CCF200EDB3EA /* CoreTextParser.m */; };
@@ -28,6 +30,10 @@
 		32A3A3CD1B5F874000EE16C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32A3A3CF1B5F874000EE16C1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		32A3A3D21B5F874000EE16C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		32ADFB8B1B65D42A003883F2 /* UIView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Tools.h"; sourceTree = "<group>"; };
+		32ADFB8C1B65D42A003883F2 /* UIView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Tools.m"; sourceTree = "<group>"; };
+		32C6465C1B6219830049C9B9 /* DisPlayViewData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisPlayViewData.h; sourceTree = "<group>"; };
+		32C6465D1B6219830049C9B9 /* DisPlayViewData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisPlayViewData.m; sourceTree = "<group>"; };
 		32FBA7AA1B60823C00EDB3EA /* CoreTextDemo-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreTextDemo-Prefix.pch"; sourceTree = "<group>"; };
 		32FBA7AB1B6098BC00EDB3EA /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		32FBA7AD1B60CBB800EDB3EA /* coreText_img.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = coreText_img.jpeg; sourceTree = "<group>"; };
@@ -93,9 +99,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		32ADFB8A1B65D3FD003883F2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				32ADFB8B1B65D42A003883F2 /* UIView+Tools.h */,
+				32ADFB8C1B65D42A003883F2 /* UIView+Tools.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		32FBA7AF1B60CC0000EDB3EA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				32ADFB8A1B65D3FD003883F2 /* Categories */,
 				32FBA7B21B60CC5C00EDB3EA /* Models */,
 				32FBA7B11B60CC4700EDB3EA /* Controllers */,
 				32FBA7B01B60CC3300EDB3EA /* Views */,
@@ -126,6 +142,8 @@
 			children = (
 				32FBA7B31B60CCF200EDB3EA /* CoreTextParser.h */,
 				32FBA7B41B60CCF200EDB3EA /* CoreTextParser.m */,
+				32C6465C1B6219830049C9B9 /* DisPlayViewData.h */,
+				32C6465D1B6219830049C9B9 /* DisPlayViewData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +224,8 @@
 				32FBA7B51B60CCF200EDB3EA /* CoreTextParser.m in Sources */,
 				32A3A3C81B5F874000EE16C1 /* AppDelegate.m in Sources */,
 				32A3A3C51B5F874000EE16C1 /* main.m in Sources */,
+				32ADFB8D1B65D42A003883F2 /* UIView+Tools.m in Sources */,
+				32C6465E1B6219830049C9B9 /* DisPlayViewData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

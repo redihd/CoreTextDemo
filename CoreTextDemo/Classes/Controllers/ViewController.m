@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "CoreTextParser.h"
+#import "DisPlayViewData.h"
 
 @interface ViewController ()
 
@@ -18,9 +19,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0x016655);
-    CoreTextParser* parser = [[CoreTextParser alloc] init];
-    [self.disPlayView setDataSourceWithAttributedString:[parser getAttrStringFromText: @"<img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> Hello <font color=\"red\">core text <font color=\"blue\">world!"] images:parser.images];
+
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    CoreTextParser* parser = [[CoreTextParser alloc] init];
+    DisPlayViewData *data = [parser getDisplayDataWithText:@"<img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> Hello <font color=\"red\">core text <font color=\"blue\">world! <img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\">"];
+    [self.disPlayView setDataSourceWithDisPlayData:data];
+    
+    self.disPlayView.height = data.viewHeight;
 }
 
 - (void)didReceiveMemoryWarning {

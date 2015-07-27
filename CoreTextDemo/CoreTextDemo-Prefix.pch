@@ -24,4 +24,5 @@
     #import <Foundation/Foundation.h>
     //引入CoreText相关库
     #import "CoreText/CoreText.h"
+    #import "UIView+Tools.h"
 #endif

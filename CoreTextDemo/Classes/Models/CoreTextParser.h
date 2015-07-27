@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "DisPlayViewData.h"
 
 @interface CoreTextParser : NSObject
 
@@ -18,5 +19,6 @@
 
 @property (strong, nonatomic) NSMutableArray* images;
 
-- (NSAttributedString*)getAttrStringFromText:(NSString*)text;
+- (DisPlayViewData *)getDisplayDataWithText:(NSString*)text;
+
 @end

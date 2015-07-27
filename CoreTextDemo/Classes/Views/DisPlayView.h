@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DisPlayViewData.h"
 
 @interface DisPlayView : UIView
 
 @property (strong, nonatomic) NSMutableArray * images;
 @property (assign, nonatomic) CTFrameRef ctFrame;
-@property (strong, nonatomic) NSMutableArray * drawImages;
-@property (copy, nonatomic) NSAttributedString * attString;
+@property (strong, nonatomic) NSArray * drawImages;
+@property (strong, nonatomic) NSAttributedString * attString;
 
 - (void)setDataSourceWithAttributedString:(NSAttributedString *)attring images:(NSMutableArray *)images;
+- (void)setDataSourceWithDisPlayData:(DisPlayViewData *)displayData;
 
 @end
