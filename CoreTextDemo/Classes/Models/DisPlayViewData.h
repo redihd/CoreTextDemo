@@ -14,5 +14,6 @@
 @property (assign, nonatomic) CTFrameRef ctFrame;
 @property (strong, nonatomic) NSAttributedString * content;
 @property (strong, nonatomic) NSArray * imageArray;
+@property (strong, nonatomic) NSArray * linkArray;
 
 @end

@@ -18,6 +18,7 @@
 @property (assign, readwrite) float strokeWidth;
 
 @property (strong, nonatomic) NSMutableArray* images;
+@property (strong, nonatomic) NSMutableArray* links;
 
 - (DisPlayViewData *)getDisplayDataWithText:(NSString*)text;
 

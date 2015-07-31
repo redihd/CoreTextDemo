@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32616EBB1B663C4A0013523E /* YYViewHierarchy3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 32616EBA1B663C4A0013523E /* YYViewHierarchy3D.m */; };
 		32A3A3C51B5F874000EE16C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3C41B5F874000EE16C1 /* main.m */; };
 		32A3A3C81B5F874000EE16C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3C71B5F874000EE16C1 /* AppDelegate.m */; };
 		32A3A3CE1B5F874000EE16C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3CC1B5F874000EE16C1 /* Main.storyboard */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32616EB91B663C4A0013523E /* YYViewHierarchy3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYViewHierarchy3D.h; sourceTree = "<group>"; };
+		32616EBA1B663C4A0013523E /* YYViewHierarchy3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYViewHierarchy3D.m; sourceTree = "<group>"; };
 		32A3A3BF1B5F874000EE16C1 /* CoreTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A3A3C31B5F874000EE16C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A3A3C41B5F874000EE16C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -57,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		32616EB81B663C0D0013523E /* External */ = {
+			isa = PBXGroup;
+			children = (
+				32616EB91B663C4A0013523E /* YYViewHierarchy3D.h */,
+				32616EBA1B663C4A0013523E /* YYViewHierarchy3D.m */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
 		32A3A3B61B5F874000EE16C1 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +88,7 @@
 		32A3A3C11B5F874000EE16C1 /* CoreTextDemo */ = {
 			isa = PBXGroup;
 			children = (
+				32616EB81B663C0D0013523E /* External */,
 				32A3A3C61B5F874000EE16C1 /* AppDelegate.h */,
 				32A3A3C71B5F874000EE16C1 /* AppDelegate.m */,
 				32FBA7AF1B60CC0000EDB3EA /* Classes */,
@@ -220,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32FBA7B81B60CD0800EDB3EA /* ViewController.m in Sources */,
+				32616EBB1B663C4A0013523E /* YYViewHierarchy3D.m in Sources */,
 				32FBA7BB1B60CD3000EDB3EA /* DisPlayView.m in Sources */,
 				32FBA7B51B60CCF200EDB3EA /* CoreTextParser.m in Sources */,
 				32A3A3C81B5F874000EE16C1 /* AppDelegate.m in Sources */,

@@ -22,6 +22,7 @@
         self.strokeColor = [UIColor whiteColor];
         self.strokeWidth = 0.0;
         self.images = [NSMutableArray array];
+        self.links = [NSMutableArray array];
     }
     return self;
 }
@@ -81,101 +82,147 @@ static CGFloat widthCallback( void* ref ){
         //处理parts[1]中所含的标签
         if ([parts count]>1) {
             NSString* tag = (NSString*)[parts objectAtIndex:1];
-            [self addFontPartWithTag:tag];
-            [self addImagePartWithTag:tag AttributedString:aString];
+            if ([tag hasPrefix:@"font"]) {
+                [self addFontPartWithTag:tag];
+            }
+            if ([tag hasPrefix:@"img"]) {
+                [self addImagePartWithTag:tag AttributedString:aString];
+            }
+            if ([tag hasPrefix:@"link"]) {
+                [self addLinkPartWithTag:tag AttributedString:aString];
+            }
         }
     }
     return [self setDisPlayDataWithAttributedString:aString];
 }
 
 - (void)addFontPartWithTag:(NSString *)tag{
-    if ([tag hasPrefix:@"font"]) {
-        //画笔颜色
-        NSRegularExpression* scolorRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeColor=\")\\w+" options:0 error:NULL];
-        [scolorRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-            if ([[tag substringWithRange:match.range] isEqualToString:@"none"]) {
-                self.strokeWidth = 0.0;
-            } else {
-                self.strokeWidth = -3.0;
-                SEL colorSel = NSSelectorFromString([NSString stringWithFormat: @"%@Color", [tag substringWithRange:match.range]]);
-                self.strokeColor = [UIColor performSelector:colorSel];
-            }
-        }];
-        
-        // 字体颜色
-        NSRegularExpression* colorRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=color=\")\\w+" options:0 error:NULL];
-        [colorRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+    //画笔颜色
+    NSRegularExpression* scolorRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=strokeColor=\")\\w+" options:0 error:NULL];
+    [scolorRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        if ([[tag substringWithRange:match.range] isEqualToString:@"none"]) {
+            self.strokeWidth = 0.0;
+        } else {
+            self.strokeWidth = -3.0;
             SEL colorSel = NSSelectorFromString([NSString stringWithFormat: @"%@Color", [tag substringWithRange:match.range]]);
-            self.color = [UIColor performSelector:colorSel];
-        }];
-        
-        //字体大小
-        NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=face=\")[^\"]+" options:0 error:NULL];
-        [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-            self.font = [tag substringWithRange:match.range];
-        }];
-    }
+            self.strokeColor = [UIColor performSelector:colorSel];
+        }
+    }];
+    
+    // 字体颜色
+    NSRegularExpression* colorRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=color=\")\\w+" options:0 error:NULL];
+    [colorRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        SEL colorSel = NSSelectorFromString([NSString stringWithFormat: @"%@Color", [tag substringWithRange:match.range]]);
+        self.color = [UIColor performSelector:colorSel];
+    }];
+    
+    //字体大小
+    NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=face=\")[^\"]+" options:0 error:NULL];
+    [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        self.font = [tag substringWithRange:match.range];
+    }];
 }
 
 - (void)addImagePartWithTag:(NSString *)tag AttributedString:(NSMutableAttributedString *)aString{
-    if ([tag hasPrefix:@"img"]) {
-        
-        __block NSNumber* width = [NSNumber numberWithInt:0];
-        __block NSNumber* height = [NSNumber numberWithInt:0];
-        __block NSString* fileName = @"";
-        
-        //宽度
-        NSRegularExpression* widthRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=width=\")[^\"]+" options:0 error:NULL];
-        [widthRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-            width = [NSNumber numberWithInt: [[tag substringWithRange: match.range] intValue] ];
-        }];
-        
-        //高度
-        NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=height=\")[^\"]+" options:0 error:NULL];
-        [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-            height = [NSNumber numberWithInt: [[tag substringWithRange:match.range] intValue]];
-        }];
-        
-        //图片名
-        NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=src=\")[^\"]+" options:0 error:NULL];
-        [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
-            fileName = [tag substringWithRange: match.range];
-        }];
-        
-        //添加到数组中等待之后的绘制
-        [self.images addObject:
-         [NSDictionary dictionaryWithObjectsAndKeys:
-          width, @"width",
-          height, @"height",
-          fileName, @"fileName",
-          [NSNumber numberWithInt: (int)[aString length]], @"location",
-          nil]
-         ];
-        
-        //设置CTRun的callBacks 和图片相关信息 来得到 CTRunDelegateRef
-        CTRunDelegateCallbacks callbacks;
-        callbacks.version = kCTRunDelegateVersion1;
-        callbacks.getAscent = ascentCallback;
-        callbacks.getDescent = descentCallback;
-        callbacks.getWidth = widthCallback;
-        
-        NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 width, @"width",
-                                 height, @"height",
-                                 nil];
-        
-        CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr));
-        NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                //set the delegate
-                                                (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
-                                                nil];
-        
-        //添加一个空白占位符 让它能够调用 callBacks 最后给生成的图片留下位置来做绘制操作
-        // 使用0xFFFC作为空白的占位符
-        unichar objectReplacementChar = 0xFFFC;
-        NSString * content = [NSString stringWithCharacters:&objectReplacementChar length:1];
-        [aString appendAttributedString:[[NSAttributedString alloc] initWithString:content attributes:attrDictionaryDelegate]];
-    }
+    __block NSNumber* width = [NSNumber numberWithInt:0];
+    __block NSNumber* height = [NSNumber numberWithInt:0];
+    __block NSString* fileName = @"";
+    
+    //宽度
+    NSRegularExpression* widthRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=width=\")[^\"]+" options:0 error:NULL];
+    [widthRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        width = [NSNumber numberWithInt: [[tag substringWithRange: match.range] intValue] ];
+    }];
+    
+    //高度
+    NSRegularExpression* faceRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=height=\")[^\"]+" options:0 error:NULL];
+    [faceRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        height = [NSNumber numberWithInt: [[tag substringWithRange:match.range] intValue]];
+    }];
+    
+    //图片名
+    NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=src=\")[^\"]+" options:0 error:NULL];
+    [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        fileName = [tag substringWithRange: match.range];
+    }];
+    
+    //添加到数组中等待之后的绘制
+    [self.images addObject:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      width, @"width",
+      height, @"height",
+      fileName, @"fileName",
+      [NSNumber numberWithInt: (int)[aString length]], @"location",
+      nil]
+     ];
+    
+    //设置CTRun的callBacks 和图片相关信息 来得到 CTRunDelegateRef
+    CTRunDelegateCallbacks callbacks;
+    callbacks.version = kCTRunDelegateVersion1;
+    callbacks.getAscent = ascentCallback;
+    callbacks.getDescent = descentCallback;
+    callbacks.getWidth = widthCallback;
+    
+    NSDictionary* imgAttr = [NSDictionary dictionaryWithObjectsAndKeys:
+                             width, @"width",
+                             height, @"height",
+                             nil];
+    
+    CTRunDelegateRef delegate = CTRunDelegateCreate(&callbacks, (__bridge void *)(imgAttr));
+    NSDictionary *attrDictionaryDelegate = [NSDictionary dictionaryWithObjectsAndKeys:
+                                            //set the delegate
+                                            (__bridge id)delegate, (NSString*)kCTRunDelegateAttributeName,
+                                            nil];
+    
+    //添加一个空白占位符 让它能够调用 callBacks 最后给生成的图片留下位置来做绘制操作
+    // 使用0xFFFC作为空白的占位符
+    unichar objectReplacementChar = 0xFFFC;
+    NSString * content = [NSString stringWithCharacters:&objectReplacementChar length:1];
+    [aString appendAttributedString:[[NSAttributedString alloc] initWithString:content attributes:attrDictionaryDelegate]];
+}
+
+- (void)addLinkPartWithTag:(NSString *)tag AttributedString:(NSMutableAttributedString *)aString{
+    __block NSString* urlString= @"";
+    __block NSString* contentString= @"";
+
+    // 字体颜色
+    NSRegularExpression* colorRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=color=\")\\w+" options:0 error:NULL];
+    [colorRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        SEL colorSel = NSSelectorFromString([NSString stringWithFormat: @"%@Color", [tag substringWithRange:match.range]]);
+        self.color = [UIColor performSelector:colorSel];
+    }];
+    
+    //url链接
+    NSRegularExpression* srcRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=url=\")[^\"]+" options:0 error:NULL];
+    [srcRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        urlString = [tag substringWithRange: match.range];
+    }];
+    NSRegularExpression* contentRegex = [[NSRegularExpression alloc] initWithPattern:@"(?<=content=\").+(?=\\\">)" options:0 error:NULL];
+    [contentRegex enumerateMatchesInString:tag options:0 range:NSMakeRange(0, [tag length]) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, BOOL *stop){
+        contentString = [tag substringWithRange: match.range];
+    }];
+    //添加到数组中等待之后的绘制
+    [self.links addObject:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      urlString, @"urlString",
+      contentString, @"content",
+      [NSNumber numberWithInt: (int)[aString length]], @"location",
+       aString,@"url",
+      nil]
+     ];
+    
+    CTFontRef fontRef = CTFontCreateWithName((CFStringRef)self.font,
+                                             24.0f, NULL);
+    
+    //为 NSAttributedString 设置格式化属性
+    NSDictionary* attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (id)self.color.CGColor, kCTForegroundColorAttributeName,
+                           (__bridge id)fontRef, kCTFontAttributeName,
+                           (id)self.strokeColor.CGColor, (NSString *) kCTStrokeColorAttributeName,
+                           (id)[NSNumber numberWithFloat: self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+                           (id)[NSNumber numberWithFloat: 1], (NSString *)kCTUnderlineStyleAttributeName,
+                           nil];
+    [aString appendAttributedString:[[NSAttributedString alloc] initWithString:contentString attributes:attrs]];
 }
 
 #pragma mark -
@@ -198,7 +245,8 @@ static CGFloat widthCallback( void* ref ){
     data.ctFrame = frame;
     data.viewHeight = textHeight;
     data.imageArray = self.images;
-    
+    data.linkArray = self.links;
+
     CFRelease(framesetter);
     return data;
 }
