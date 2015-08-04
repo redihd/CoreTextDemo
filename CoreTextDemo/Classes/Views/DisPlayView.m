@@ -7,6 +7,7 @@
 //
 
 #import "DisPlayView.h"
+#import "CoreTextTool.h"
 
 @interface DisPlayView ()
 
@@ -60,10 +61,19 @@
         if (CGRectContainsPoint(rect, touchPoint)) {
             NSLog(@"hint image");
             // 在这里处理点击后的逻辑
+            NSDictionary *userInfo = @{ @"imageData": imageData };
+            NSLog(@"%@",userInfo);
             return;
         }
     }
     
+    NSDictionary * linkDic = [CoreTextTool touchLinkInView:self atPoint:touchPoint data:self.coreTextData];
+    if(nil != linkDic){
+        NSLog(@"%@",linkDic[@"urlString"]);
+        if (self.linkClickBlock) {
+            self.linkClickBlock(linkDic[@"urlString"]);
+        }
+    }
 }
 
 #pragma mark -
@@ -87,7 +97,7 @@
     // 反转坐标系，如果将这部分的代码块注释掉，你会发现，整个界面将是上下翻转的
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, self.bounds.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextScaleCTM(context, 1.0, -1);
     
     // CTFrameDraw 将 frame 描述到设备上下文
     CTFrameDraw(self.ctFrame, context);

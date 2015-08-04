@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "CoreTextParser.h"
 #import "DisPlayViewData.h"
+#import "showWebViewController.h"
 
 @interface ViewController ()
 
@@ -19,8 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0x016655);
+    __weak typeof(self) weakSelf = self;
+    self.disPlayView.linkClickBlock = ^(NSString *url){
+        
+        showWebViewController *vc = [[showWebViewController alloc] init];
+        vc.url = url;
+        [weakSelf presentViewController:vc animated:YES completion:nil];
+    };
     [YYViewHierarchy3D show];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewWillLayoutSubviews{
@@ -33,7 +40,7 @@
     
     CoreTextParser* parser = [[CoreTextParser alloc] init];
     
-    DisPlayViewData *data = [parser getDisplayDataWithText:@"<img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> Hello <font color=\"red\">core text <font color=\"blue\">world! <img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> <link url=\"http://blog.devtang.com\" color=\"red\" content=\"link test\">"];
+    DisPlayViewData *data = [parser getDisplayDataWithText:@"<img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> Hello <font color=\"red\">core text <font color=\"blue\">world! <img src=\"coreText_img.jpeg\" width=\"120\" height=\"182\"> <link url=\"https://github.com/redihd/CoreTextDemo.git\" color=\"red\" content=\"link test\">"];
     
     [self.disPlayView setDataSourceWithDisPlayData:data];
     

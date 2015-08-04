@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTextDemo/External/YYViewHierarchy3D.m"
-            timestampString = "459685461.95857"
+            filePath = "CoreTextDemo/Classes/Controllers/showWebViewController.m"
+            timestampString = "460371926.913517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "-dumpView:atDeep:atOriginDelta:toArray:"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTextDemo/Classes/Views/DisPlayView.m"
-            timestampString = "460017174.728926"
+            filePath = "CoreTextDemo/Classes/Controllers/showWebViewController.m"
+            timestampString = "460371926.913517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-userTapGestureDetected:"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "-closeButtonPressed:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

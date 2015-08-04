@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "DisPlayViewData.h"
 
+typedef void(^LinkClickBlock)(NSString *url);
+
 @interface DisPlayView : UIView
 
 @property (assign, nonatomic) CTFrameRef ctFrame;
 @property (strong, nonatomic) NSArray * drawImages;
 @property (strong, nonatomic) NSAttributedString * attString;
+
+@property (copy, nonatomic) LinkClickBlock linkClickBlock;
 
 - (void)setDataSourceWithDisPlayData:(DisPlayViewData *)displayData;
 

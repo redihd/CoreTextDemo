@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3230F2AE1B6B6F4600C1C136 /* CoreTextTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3230F2AD1B6B6F4600C1C136 /* CoreTextTool.m */; };
 		32616EBB1B663C4A0013523E /* YYViewHierarchy3D.m in Sources */ = {isa = PBXBuildFile; fileRef = 32616EBA1B663C4A0013523E /* YYViewHierarchy3D.m */; };
+		3267AF461B70AB410080553E /* showWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3267AF441B70AB410080553E /* showWebViewController.m */; };
+		3267AF471B70AB410080553E /* showWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3267AF451B70AB410080553E /* showWebViewController.xib */; };
 		32A3A3C51B5F874000EE16C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3C41B5F874000EE16C1 /* main.m */; };
 		32A3A3C81B5F874000EE16C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A3A3C71B5F874000EE16C1 /* AppDelegate.m */; };
 		32A3A3CE1B5F874000EE16C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32A3A3CC1B5F874000EE16C1 /* Main.storyboard */; };
@@ -23,8 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3230F2AC1B6B6F4600C1C136 /* CoreTextTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextTool.h; sourceTree = "<group>"; };
+		3230F2AD1B6B6F4600C1C136 /* CoreTextTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextTool.m; sourceTree = "<group>"; };
 		32616EB91B663C4A0013523E /* YYViewHierarchy3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYViewHierarchy3D.h; sourceTree = "<group>"; };
 		32616EBA1B663C4A0013523E /* YYViewHierarchy3D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYViewHierarchy3D.m; sourceTree = "<group>"; };
+		3267AF431B70AB410080553E /* showWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showWebViewController.h; sourceTree = "<group>"; };
+		3267AF441B70AB410080553E /* showWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showWebViewController.m; sourceTree = "<group>"; };
+		3267AF451B70AB410080553E /* showWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = showWebViewController.xib; sourceTree = "<group>"; };
 		32A3A3BF1B5F874000EE16C1 /* CoreTextDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32A3A3C31B5F874000EE16C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32A3A3C41B5F874000EE16C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -146,6 +154,9 @@
 			children = (
 				32FBA7B61B60CD0800EDB3EA /* ViewController.h */,
 				32FBA7B71B60CD0800EDB3EA /* ViewController.m */,
+				3267AF431B70AB410080553E /* showWebViewController.h */,
+				3267AF441B70AB410080553E /* showWebViewController.m */,
+				3267AF451B70AB410080553E /* showWebViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -157,6 +168,8 @@
 				32FBA7B41B60CCF200EDB3EA /* CoreTextParser.m */,
 				32C6465C1B6219830049C9B9 /* DisPlayViewData.h */,
 				32C6465D1B6219830049C9B9 /* DisPlayViewData.m */,
+				3230F2AC1B6B6F4600C1C136 /* CoreTextTool.h */,
+				3230F2AD1B6B6F4600C1C136 /* CoreTextTool.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -220,6 +233,7 @@
 			files = (
 				32A3A3CE1B5F874000EE16C1 /* Main.storyboard in Resources */,
 				32A3A3D31B5F874000EE16C1 /* LaunchScreen.xib in Resources */,
+				3267AF471B70AB410080553E /* showWebViewController.xib in Resources */,
 				32A3A3D01B5F874000EE16C1 /* Images.xcassets in Resources */,
 				32FBA7AE1B60CBB800EDB3EA /* coreText_img.jpeg in Resources */,
 			);
@@ -232,6 +246,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3267AF461B70AB410080553E /* showWebViewController.m in Sources */,
+				3230F2AE1B6B6F4600C1C136 /* CoreTextTool.m in Sources */,
 				32FBA7B81B60CD0800EDB3EA /* ViewController.m in Sources */,
 				32616EBB1B663C4A0013523E /* YYViewHierarchy3D.m in Sources */,
 				32FBA7BB1B60CD3000EDB3EA /* DisPlayView.m in Sources */,
